@@ -1,4 +1,4 @@
-# 🚗 CABO — College Ride Sharing Platform
+<img width="1919" height="987" alt="image" src="https://github.com/user-attachments/assets/a6ad7e99-2757-4289-9d35-9985ba55f0b8" /># 🚗 CABO — College Ride Sharing Platform
 
 ![Tech](https://img.shields.io/badge/Stack-SpringBoot%20%7C%20React%20%7C%20Firebase-blue)
 ![Status](https://img.shields.io/badge/Status-Active-success)
@@ -18,8 +18,16 @@ CABO is a **full-stack ride-sharing platform for college students**, enabling th
 ---
 
 ## 📸 Screenshots
+🏠 Home Page
+<img width="1919" height="985" alt="Screenshot 2026-05-05 212042" src="https://github.com/user-attachments/assets/848c7ff6-915c-4d73-8e4c-e0b89b4d63e3" />
+<img width="1919" height="987" alt="Screenshot 2026-05-05 212100" src="https://github.com/user-attachments/assets/fd4f0781-6999-427f-9660-a2c863e3ac34" />
 
-> *(Add screenshots here for best impact — Home, Create Ride, Chat, Admin Panel)*
+🚗 Create Ride
+<img width="1919" height="986" alt="Screenshot 2026-05-05 212256" src="https://github.com/user-attachments/assets/c96106cb-962c-4c8f-8ee5-b53228d46d6e" />
+<img width="1919" height="987" alt="Screenshot 2026-05-05 212315" src="https://github.com/user-attachments/assets/ec6259b7-2527-48b1-aec1-22721e8b2812" />
+
+
+
 
 ---
 
