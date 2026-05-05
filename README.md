@@ -1,172 +1,195 @@
-# CABO — College Ride Sharing Platform
+# 🚗 CABO — College Ride Sharing Platform
 
-A full-stack web application that allows college students to share rides with others traveling in the same direction. Built with **Spring Boot** (backend) and **React + Vite** (frontend).
+![Tech](https://img.shields.io/badge/Stack-SpringBoot%20%7C%20React%20%7C%20Firebase-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-> **Note:** This is NOT a taxi service. Students who are already traveling somewhere post their ride, and others can join them.
+CABO is a **full-stack ride-sharing platform for college students**, enabling them to share rides with others traveling in the same direction.
+
+> ⚠️ This is **NOT a taxi service** — users post rides they are already taking, and others can join.
 
 ---
 
-## 🚀 Features
+## 🌐 Live Demo
 
-### Core
-- **Create Ride** — Post your trip with car details (model, type, number), route, date/time, and available seats
-- **Find Rides** — Search by from/to location and filter by date (IRCTC-style date selection)
-- **Join Ride** — Join available rides; seat count auto-decrements with duplicate join prevention
-- **Ride Details** — View driver name, car info, phone number, participants list
+* 🔗 Frontend: *(Add your deployed link here)*
+* 🔗 Backend API: https://cabo-backend.onrender.com
 
-### Communication
-- **Real-time Chat** — WebSocket-powered group chat for ride participants
-- **Notifications** — Get notified when someone joins/leaves your ride
+---
 
-### Safety
-- **Report Ride** — Report fake/misleading rides with reason selection (Fake Ride, Driver Not Responding, Wrong Information, Other)
-- **Admin Dashboard** — View reported rides, manage users (warn/block/unblock), moderate content
+## 📸 Screenshots
 
-### Authentication
-- **JWT Authentication** — Secure login/register with email, phone, password
-- **Role-based Access** — Student and Admin roles with route-level protection
+> *(Add screenshots here for best impact — Home, Create Ride, Chat, Admin Panel)*
+
+---
+
+## ✨ Features
+
+### 🚀 Core Features
+
+* Create and publish rides with full details
+* Search rides by location & date (IRCTC-style)
+* Join rides with real-time seat updates
+* Prevent duplicate bookings
+
+### 💬 Real-Time Communication
+
+* WebSocket-based group chat for ride participants
+* Instant messaging within rides
+
+### 🔔 Notifications
+
+* Get notified when someone joins/leaves your ride
+* Admin warnings & updates
+
+### 🛡️ Safety & Moderation
+
+* Report fake or suspicious rides
+* Admin dashboard for monitoring users & rides
+* User blocking / warning system
+
+### 🔐 Authentication
+
+* Firebase Authentication (Email/Password)
+* Secure session handling via Firebase SDK
+* Protected frontend routes
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-cabo-backend/                          cabo-frontend/
-├── src/main/java/com/cabo/           ├── src/
-│   ├── config/                       │   ├── components/
-│   │   ├── JwtFilter.java            │   ├── context/
-│   │   ├── JwtUtil.java              │   ├── pages/
-│   │   ├── SecurityConfig.java       │   │   ├── Home.jsx
-│   │   └── WebSocketConfig.java      │   │   ├── Login.jsx
-│   ├── controller/                   │   │   ├── Register.jsx
-│   │   ├── AuthController.java       │   │   ├── Rides.jsx
-│   │   ├── RideController.java       │   │   ├── CreateRide.jsx
-│   │   ├── ChatController.java       │   │   ├── RideDetail.jsx
-│   │   ├── ReportController.java     │   │   ├── Dashboard.jsx
-│   │   ├── AdminController.java      │   │   ├── Profile.jsx
-│   │   └── NotificationController    │   │   └── Admin.jsx
-│   ├── service/                      │   ├── api.js
-│   │   ├── RideService.java          │   ├── index.css
-│   │   ├── ReportService.java        │   └── App.jsx
-│   │   └── AdminService.java         └── package.json
-│   ├── dto/
-│   ├── entity/
-│   └── repository/
-└── pom.xml
+Frontend (React + Vite)
+        ↓
+Firebase Auth (User Identity)
+        ↓
+Backend (Spring Boot REST API)
+        ↓
+Database (H2 / MySQL)
+        ↓
+WebSocket Server (Real-time Chat)
 ```
 
-**Clean Architecture Layers:**
-- **Controller** → REST endpoints, request handling
-- **Service** → Business logic, validation
-- **Repository** → Database access (JPA)
-- **DTO** → Data transfer objects
-- **Entity** → JPA entities
+---
+
+## 🧠 Tech Stack
+
+| Layer              | Technology                         |
+| ------------------ | ---------------------------------- |
+| **Frontend**       | React, Vite, React Router          |
+| **Backend**        | Spring Boot, Spring Security, JPA  |
+| **Authentication** | Firebase Authentication            |
+| **Database**       | H2 (Dev), MySQL (Prod)             |
+| **Real-time**      | WebSocket (STOMP + SockJS)         |
+| **Deployment**     | Render (Backend), *(Frontend TBD)* |
 
 ---
 
-## 🗄️ Database Schema
+## 🔥 Firebase Integration
 
-| Table | Key Fields |
-|-------|-----------|
-| **users** | id, name, email, phone, password, role, blocked, created_at |
-| **rides** | id, driver_id, from_location, to_location, date, time, car_model, car_type, car_number, seats_available, total_seats, phone_number, notes, status |
-| **bookings** | id, ride_id, user_id, joined_at (unique: ride_id + user_id) |
-| **chat_messages** | id, ride_id, sender_id, content, timestamp |
-| **reports** | id, ride_id, reported_by, reason, status, created_at |
-| **notifications** | id, user_id, message, type, ride_id, is_read, created_at |
+CABO uses **Firebase Authentication** for secure and scalable user management.
+
+### Features:
+
+* Email & Password Authentication
+* Secure token-based session handling
+* No custom auth backend required
+
+### Environment Variables
+
+Create a `.env` file in `cabo-frontend/`:
+
+```
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+```
+
+> ⚠️ Never commit `.env` to GitHub
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Overview
 
 ### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register new user |
-| POST | `/api/auth/login` | Login, get JWT token |
-| GET | `/api/auth/me` | Get current user profile |
-| PUT | `/api/auth/profile` | Update name/phone |
+
+* `GET /api/auth/me` → Get current user
+* *(Firebase handles login/signup)*
 
 ### Rides
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/rides?fromLocation=&toLocation=&date=` | Search rides (public) |
-| POST | `/api/rides` | Create ride |
-| GET | `/api/rides/{id}` | Get ride detail (public) |
-| DELETE | `/api/rides/{id}` | Cancel ride |
-| POST | `/api/rides/{id}/join` | Join ride |
-| POST | `/api/rides/{id}/leave` | Leave ride |
-| GET | `/api/rides/my` | My created & joined rides |
-| POST | `/api/rides/{id}/report` | Report a ride |
+
+* `GET /api/rides` → Search rides
+* `POST /api/rides` → Create ride
+* `POST /api/rides/{id}/join` → Join ride
+* `POST /api/rides/{id}/leave` → Leave ride
 
 ### Chat
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/rides/{id}/messages` | Get ride chat messages |
-| POST | `/api/rides/{id}/messages` | Send message |
-| WS | `/ws` (STOMP) → `/app/chat/{rideId}` | WebSocket real-time chat |
 
-### Admin (requires ADMIN role)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/admin/users` | List all users |
-| GET | `/api/admin/rides` | List all rides + stats |
-| DELETE | `/api/admin/rides/{id}` | Admin cancel ride |
-| GET | `/api/admin/reports` | List all reports |
-| PUT | `/api/admin/reports/{id}` | Update report status |
-| PUT | `/api/admin/users/{id}/warn` | Warn user (notification) |
-| PUT | `/api/admin/users/{id}/block` | Block user |
-| PUT | `/api/admin/users/{id}/unblock` | Unblock user |
+* `WS /ws` → Real-time messaging
+
+### Admin
+
+* Manage users, reports, and rides
 
 ---
 
 ## 🛠️ Setup & Run
 
-### Prerequisites
-- Java 17+
-- Node.js 18+
-- (Optional) MySQL 8+ for production
+### 🔧 Backend
 
-### Backend
-```bash
+```
 cd cabo-backend
 ./mvnw spring-boot:run
 ```
-Backend starts at `http://localhost:8080`
 
-**Default DB:** H2 (in-memory dev database, console at `/h2-console`)
+Runs at: `http://localhost:8080`
 
-**Switch to MySQL:**
-```bash
-./mvnw spring-boot:run -Dspring.profiles.active=mysql
+---
+
+### 💻 Frontend
+
 ```
-Configure credentials in `src/main/resources/application-mysql.properties`.
-
-### Frontend
-```bash
 cd cabo-frontend
 npm install
 npm run dev
 ```
-Frontend starts at `http://localhost:5173`
 
-### Admin Account
-Register with email `admin@cabo.com` to get admin access automatically.
+Runs at: `http://localhost:5173`
 
 ---
 
-## 📋 Tech Stack
+## 🔐 Security Best Practices
 
-| Layer | Technology |
-|-------|-----------|
-| **Backend** | Spring Boot 3.2, Spring Security, Spring Data JPA, WebSocket (STOMP) |
-| **Frontend** | React 19, Vite 7, React Router 7, Lucide Icons |
-| **Auth** | JWT (jjwt 0.12.5), BCrypt |
-| **Database** | H2 (dev) / MySQL (prod) |
-| **Real-time** | STOMP WebSocket + SockJS |
+* `.env` files are ignored using `.gitignore`
+* Firebase API keys are restricted
+* Role-based access control in backend
+* Input validation & error handling implemented
+
+---
+
+## 🚀 Future Improvements
+
+* Payment integration (optional)
+* Ride history analytics
+* Mobile app (Android/iOS)
+* Google Maps integration
+
+---
+
+## 👨‍💻 Author
+
+**Kuldeep Dhangad**
+
+* GitHub: https://github.com/KDGIT005/CABO
+* Project: CABO
 
 ---
 
 ## 📄 License
 
-MIT
+MIT License
+
+---
+
+⭐ If you like this project, consider giving it a star!
