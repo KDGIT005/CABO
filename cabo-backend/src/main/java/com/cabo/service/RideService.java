@@ -32,14 +32,19 @@ public class RideService {
         if (date != null && !date.isBlank()) {
             searchDate = LocalDate.parse(date);
         }
-        List<Ride> rides = rideRepository.searchRides(
-            Ride.RideStatus.ACTIVE, fromLocation, toLocation, searchDate
-        );
-        return rides.stream().map(r -> {
-            RideDto dto = RideDto.fromEntity(r);
-            dto.setParticipantCount((int) bookingRepository.countByRideId(r.getId()));
-            return dto;
-        }).collect(Collectors.toList());
+        List<Ride> rides = rideRepository.findByStatusAndSeatsAvailableGreaterThanOrderByDateAscTimeAsc(Ride.RideStatus.ACTIVE, 0);
+        
+        final LocalDate finalSearchDate = searchDate;
+        
+        return rides.stream()
+            .filter(r -> fromLocation == null || fromLocation.isBlank() || r.getFromLocation().toLowerCase().contains(fromLocation.toLowerCase()))
+            .filter(r -> toLocation == null || toLocation.isBlank() || r.getToLocation().toLowerCase().contains(toLocation.toLowerCase()))
+            .filter(r -> finalSearchDate == null || r.getDate().equals(finalSearchDate))
+            .map(r -> {
+                RideDto dto = RideDto.fromEntity(r);
+                dto.setParticipantCount((int) bookingRepository.countByRideId(r.getId()));
+                return dto;
+            }).collect(Collectors.toList());
     }
 
     @Transactional
