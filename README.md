@@ -1,206 +1,268 @@
 # 🚗 CABO — College Ride Sharing Platform
 
-![Tech](https://img.shields.io/badge/Stack-SpringBoot%20%7C%20React%20%7C%20Firebase-blue)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![License](https://img.shields.io/badge/License-MIT-green)
+![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB)
+![SpringBoot](https://img.shields.io/badge/Backend-SpringBoot-6DB33F)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791)
+![Firebase](https://img.shields.io/badge/Auth-Firebase-FFCA28)
+![Deployment](https://img.shields.io/badge/Deployment-Render%20%2B%20Vercel-black)
+![Status](https://img.shields.io/badge/Status-Live-success)
 
-CABO is a **full-stack ride-sharing platform for college students**, enabling them to share rides with others traveling in the same direction.
+CABO is a **full-stack ride-sharing platform built for college students**, allowing users traveling in the same direction to connect and share rides safely and efficiently.
 
-> ⚠️ This is **NOT a taxi service** — users post rides they are already taking, and others can join.
-
----
-
-## 🌐 Live Demo
-
-* 🔗 Frontend: *(Add your deployed link here)*
-* 🔗 Backend API: https://cabo-backend.onrender.com
+> ⚠️ CABO is **not a taxi booking service**.  
+> Users post rides they are already taking, and others can join those rides.
 
 ---
 
-## 📸 Screenshots
-🏠 Home Page
-<img width="1919" height="665" alt="Screenshot 2026-05-05 212042" src="https://github.com/user-attachments/assets/da094ad4-129f-49f5-9418-58174c939d74" />
-<img width="1919" height="913" alt="Screenshot 2026-05-05 212100" src="https://github.com/user-attachments/assets/63ae7ee5-3a36-4c78-8a96-08a3e0e47580" />
+# 🌐 Live Deployment
 
-
-🚗 Create Ride
-<img width="1919" height="986" alt="Screenshot 2026-05-05 212256" src="https://github.com/user-attachments/assets/c96106cb-962c-4c8f-8ee5-b53228d46d6e" />
-
-💬 Chat System
-<img width="1919" height="987" alt="Screenshot 2026-05-05 212315" src="https://github.com/user-attachments/assets/ec6259b7-2527-48b1-aec1-22721e8b2812" />
-
-
-
+| Service | Link |
+|---|---|
+| 🚀 Frontend | https://cabo-two.vercel.app |
+| ⚙️ Backend API | https://cabo-backend.onrender.com |
 
 ---
 
-## ✨ Features
+# 📸 Screenshots
 
-### 🚀 Core Features
+## 🏠 Home Page
 
-* Create and publish rides with full details
-* Search rides by location & date (IRCTC-style)
-* Join rides with real-time seat updates
-* Prevent duplicate bookings
+<img width="1919" height="665" alt="Home" src="https://github.com/user-attachments/assets/da094ad4-129f-49f5-9418-58174c939d74" />
 
-### 💬 Real-Time Communication
-
-* WebSocket-based group chat for ride participants
-* Instant messaging within rides
-
-### 🔔 Notifications
-
-* Get notified when someone joins/leaves your ride
-* Admin warnings & updates
-
-### 🛡️ Safety & Moderation
-
-* Report fake or suspicious rides
-* Admin dashboard for monitoring users & rides
-* User blocking / warning system
-
-### 🔐 Authentication
-
-* Firebase Authentication (Email/Password)
-* Secure session handling via Firebase SDK
-* Protected frontend routes
+<img width="1919" height="913" alt="Home2" src="https://github.com/user-attachments/assets/63ae7ee5-3a36-4c78-8a96-08a3e0e47580" />
 
 ---
 
-## 🏗️ Architecture
+## 🚗 Create Ride
 
-```
-Frontend (React + Vite)
+<img width="1919" height="986" alt="CreateRide" src="https://github.com/user-attachments/assets/c96106cb-962c-4c8f-8ee5-b53228d46d6e" />
+
+---
+
+## 💬 Real-Time Chat
+
+<img width="1919" height="987" alt="Chat" src="https://github.com/user-attachments/assets/ec6259b7-2527-48b1-aec1-22721e8b2812" />
+
+---
+
+# ✨ Features
+
+## 🚀 Ride Management
+
+- Create and publish rides
+- Search rides by location and date
+- Join or leave rides
+- Real-time seat availability updates
+- Duplicate booking prevention
+
+---
+
+## 💬 Real-Time Communication
+
+- WebSocket-powered ride chat
+- Instant messaging between ride participants
+- STOMP + SockJS integration
+
+---
+
+## 🔔 Notifications & Moderation
+
+- Ride join/leave notifications
+- User reporting system
+- Admin moderation tools
+- Warning and blocking system
+
+---
+
+## 🔐 Authentication & Security
+
+- Firebase Authentication
+- Email & Password login
+- Protected frontend routes
+- JWT-secured backend APIs
+- Role-based access control
+
+---
+
+# 🏗️ System Architecture
+
+```text
+React + Vite Frontend
         ↓
-Firebase Auth (User Identity)
+Firebase Authentication
         ↓
-Backend (Spring Boot REST API)
+Spring Boot REST API
         ↓
-Database (H2 / MySQL)
+PostgreSQL (Supabase)
         ↓
-WebSocket Server (Real-time Chat)
+WebSocket Chat System
 ```
 
 ---
 
-## 🧠 Tech Stack
+# 🧠 Tech Stack
 
-| Layer              | Technology                         |
-| ------------------ | ---------------------------------- |
-| **Frontend**       | React, Vite, React Router          |
-| **Backend**        | Spring Boot, Spring Security, JPA  |
-| **Authentication** | Firebase Authentication            |
-| **Database**       | H2 (Dev), MySQL (Prod)             |
-| **Real-time**      | WebSocket (STOMP + SockJS)         |
-| **Deployment**     | Render (Backend), *(Frontend TBD)* |
-
----
-
-## 🔥 Firebase Integration
-
-CABO uses **Firebase Authentication** for secure and scalable user management.
-
-### Features:
-
-* Email & Password Authentication
-* Secure token-based session handling
-* No custom auth backend required
-
-### Environment Variables
-
-Create a `.env` file in `cabo-frontend/`:
-
-```
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-```
-
-> ⚠️ Never commit `.env` to GitHub
+| Layer | Technology |
+|---|---|
+| Frontend | React, Vite, React Router |
+| Backend | Spring Boot, Spring Security, Spring Data JPA |
+| Database | PostgreSQL (Supabase) |
+| Authentication | Firebase Authentication |
+| Real-Time Communication | WebSocket, STOMP, SockJS |
+| Deployment | Render, Vercel |
+| ORM | Hibernate |
+| Build Tools | Maven, npm |
+| Version Control | Git & GitHub |
 
 ---
 
-## 📡 API Overview
+# ☁️ Cloud Deployment
 
-### Auth
+## Backend Deployment
+- Dockerized Spring Boot application
+- Hosted on Render
+- PostgreSQL connection pooling via Supabase
+- Environment-variable based production configuration
 
-* `GET /api/auth/me` → Get current user
-* *(Firebase handles login/signup)*
-
-### Rides
-
-* `GET /api/rides` → Search rides
-* `POST /api/rides` → Create ride
-* `POST /api/rides/{id}/join` → Join ride
-* `POST /api/rides/{id}/leave` → Leave ride
-
-### Chat
-
-* `WS /ws` → Real-time messaging
-
-### Admin
-
-* Manage users, reports, and rides
+## Frontend Deployment
+- Hosted on Vercel
+- Automatic CI/CD deployment from GitHub
 
 ---
 
-## 🛠️ Setup & Run
+# 🔄 CI/CD Workflow
 
-### 🔧 Backend
+CABO uses a simple production-style CI/CD workflow:
 
+```text
+Git Push
+   ↓
+GitHub Repository
+   ↓
+Render/Vercel Auto Build
+   ↓
+Automatic Deployment
 ```
+
+Every push to the `main` branch automatically redeploys the application.
+
+---
+
+# 🔥 Firebase Integration
+
+CABO uses Firebase Authentication for secure user identity management.
+
+## Supported Features
+
+- Email/Password Authentication
+- Secure token-based sessions
+- Authorized domain protection
+
+---
+
+# 📡 API Overview
+
+## Authentication
+- `GET /api/auth/me`
+
+## Rides
+- `GET /api/rides`
+- `POST /api/rides`
+- `POST /api/rides/{id}/join`
+- `POST /api/rides/{id}/leave`
+
+## Chat
+- `WS /ws`
+
+## Admin
+- User moderation
+- Ride monitoring
+- Reports management
+
+---
+
+# 🛠️ Local Development Setup
+
+## 🔧 Backend
+
+```bash
 cd cabo-backend
 ./mvnw spring-boot:run
 ```
 
-Runs at: `http://localhost:8080`
+Runs on:
+```text
+http://localhost:8080
+```
 
 ---
 
-### 💻 Frontend
+## 💻 Frontend
 
-```
+```bash
 cd cabo-frontend
 npm install
 npm run dev
 ```
 
-Runs at: `http://localhost:5173`
+Runs on:
+```text
+http://localhost:5173
+```
 
 ---
 
-## 🔐 Security Best Practices
+# 🌍 Environment Variables
 
-* `.env` files are ignored using `.gitignore`
-* Firebase API keys are restricted
-* Role-based access control in backend
-* Input validation & error handling implemented
+## Frontend (`cabo-frontend/.env`)
 
----
-
-## 🚀 Future Improvements
-
-* Payment integration (optional)
-* Ride history analytics
-* Mobile app (Android/iOS)
-* Google Maps integration
+```env
+VITE_API_URL=your_backend_url
+VITE_FIREBASE_API_KEY=your_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
 
 ---
 
-## 👨‍💻 Author
+# 🔐 Security Best Practices
 
-**Kuldeep Dhangad**
-
-* GitHub: https://github.com/KDGIT005/CABO
-* Project: CABO
-
----
-
-## 📄 License
-
-MIT License
+- `.env` excluded via `.gitignore`
+- Firebase authorized domains configured
+- JWT-protected backend routes
+- CORS protection enabled
+- Input validation implemented
 
 ---
 
-⭐ If you like this project, consider giving it a star!
+# 🚀 Future Improvements
+
+- Google Maps integration
+- Mobile application
+- Ride analytics dashboard
+- Push notifications
+- AI-based ride recommendations
+
+---
+
+# 👨‍💻 Author
+
+## Kuldeep Dhangad
+
+- GitHub: https://github.com/KDGIT005
+- Project Repository: https://github.com/KDGIT005/CABO
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
