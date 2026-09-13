@@ -25,22 +25,25 @@ CABO is a **full-stack ride-sharing platform built for college students**, allow
 
 # 📸 Screenshots
 
-## 🏠 Home Page
+## 🏠 Home & Discovery
+![Cabo Home Page](./screenshots/home.png)
 
-<img width="1919" height="665" alt="Home" src="https://github.com/user-attachments/assets/da094ad4-129f-49f5-9418-58174c939d74" />
-
-<img width="1919" height="913" alt="Home2" src="https://github.com/user-attachments/assets/63ae7ee5-3a36-4c78-8a96-08a3e0e47580" />
+## ⚡ How It Works
+![Cabo How It Works](./screenshots/features.png)
 
 ---
 
-## 🚗 Create Ride
+## 🔍 Find Rides
+![Cabo Find Rides](./screenshots/rides.png)
 
-<img width="1919" height="986" alt="CreateRide" src="https://github.com/user-attachments/assets/c96106cb-962c-4c8f-8ee5-b53228d46d6e" />
+---
+
+## 🔐 Student Authentication
+![Cabo Authentication](./screenshots/login.png)
 
 ---
 
 ## 💬 Real-Time Chat
-
 <img width="1919" height="987" alt="Chat" src="https://github.com/user-attachments/assets/ec6259b7-2527-48b1-aec1-22721e8b2812" />
 
 ---
