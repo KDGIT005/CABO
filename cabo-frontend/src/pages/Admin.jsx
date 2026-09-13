@@ -221,7 +221,7 @@ export default function Admin() {
                     <td>
                       <span style={{
                         padding: '3px 8px', borderRadius: 20, fontSize: '0.75rem', fontWeight: 600,
-                        background: u.role === 'ADMIN' ? 'rgba(108,92,231,0.15)' : 'rgba(255,255,255,0.05)',
+                        background: u.role === 'ADMIN' ? 'rgba(91,75,214,0.12)' : 'rgba(20,21,31,0.06)',
                         color: u.role === 'ADMIN' ? 'var(--accent-primary)' : 'var(--text-secondary)'
                       }}>
                         {u.role}
@@ -331,7 +331,7 @@ export default function Admin() {
                 </thead>
                 <tbody>
                   {reports.map(r => (
-                    <tr key={r.id} style={{ background: r.status === 'PENDING' ? 'rgba(253,203,110,0.05)' : undefined }}>
+                    <tr key={r.id} style={{ background: r.status === 'PENDING' ? 'rgba(180,83,9,0.06)' : undefined }}>
                       <td>{r.id}</td>
                       <td style={{ fontWeight: 500 }}>{r.rideRoute}</td>
                       <td>{r.rideDriver?.name}</td>

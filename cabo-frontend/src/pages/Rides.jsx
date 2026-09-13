@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
-import { Search, MapPin, Calendar, Users, ArrowRight, Car, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, MapPin, Calendar, Users, ArrowRight, Car } from 'lucide-react';
 
 export default function Rides() {
   const [rides, setRides] = useState([]);
@@ -10,7 +10,6 @@ export default function Rides() {
   const [toLocation, setToLocation] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
 
-  // Generate date chips (today + next 7 days)
   const getDateChips = () => {
     const chips = [];
     const today = new Date();
@@ -65,30 +64,45 @@ export default function Rides() {
     return `${h12}:${m} ${ampm}`;
   };
 
-  const carTypeLabel = (type) => {
-    const map = { HATCHBACK: '🚗 Hatchback', SEDAN: '🚙 Sedan', SUV: '🚐 SUV' };
-    return map[type] || type;
+  const carTypeClass = (type) => {
+    const map = { HATCHBACK: 'hatchback', SEDAN: 'sedan', SUV: 'suv' };
+    return map[type] || '';
   };
 
   return (
     <div className="page">
       <div className="container">
+
+        {/* Header */}
         <div className="page-header">
           <h1 className="page-title">Find a Ride</h1>
           <p className="page-subtitle">Search available rides and join one that fits your route</p>
         </div>
 
+        {/* Search bar */}
         <form onSubmit={handleSearch} className="search-bar">
-          <input type="text" className="form-input" placeholder="🔍 From location"
-            value={fromLocation} onChange={e => setFromLocation(e.target.value)} />
-          <input type="text" className="form-input" placeholder="📍 To location"
-            value={toLocation} onChange={e => setToLocation(e.target.value)} />
-          <button type="submit" className="btn btn-primary">
-            <Search size={18} /> Search
+          <MapPin size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="From location"
+            value={fromLocation}
+            onChange={e => setFromLocation(e.target.value)}
+          />
+          <ArrowRight size={14} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="To location"
+            value={toLocation}
+            onChange={e => setToLocation(e.target.value)}
+          />
+          <button type="submit" className="btn btn-primary btn-sm">
+            <Search size={15} /> Search
           </button>
         </form>
 
-        {/* Date Filter Chips (IRCTC style) */}
+        {/* Date Filter Chips */}
         <div className="date-filter">
           <button
             className={`date-chip ${selectedDate === '' ? 'active' : ''}`}
@@ -109,8 +123,9 @@ export default function Rides() {
           ))}
         </div>
 
+        {/* Results */}
         {loading ? (
-          <div className="loading-spinner"><div className="spinner"></div></div>
+          <div className="loading-spinner"><div className="spinner" /></div>
         ) : rides.length === 0 ? (
           <div className="empty-state">
             <Search size={48} />
@@ -124,37 +139,45 @@ export default function Rides() {
                 <div className="card ride-card">
                   <div className="ride-card-header">
                     <div className="ride-route">
-                      <MapPin size={16} />
+                      <MapPin size={14} />
                       {ride.fromLocation}
-                      <ArrowRight size={16} className="ride-route-arrow" />
+                      <ArrowRight size={14} className="ride-route-arrow" />
                       {ride.toLocation}
                     </div>
                     <span className={`ride-status ${ride.status?.toLowerCase()}`}>{ride.status}</span>
                   </div>
+
                   <div className="ride-card-body">
                     <div className="ride-info-item">
-                      <Calendar size={14} />
+                      <Calendar size={13} />
                       <span>{formatDate(ride.date)}</span>
                     </div>
                     <div className="ride-info-item">
-                      <Users size={14} />
+                      <Users size={13} />
                       <span>{ride.seatsAvailable} seat{ride.seatsAvailable !== 1 ? 's' : ''} left</span>
                     </div>
                     <div className="ride-info-item">
-                      <Car size={14} />
-                      <span>{ride.carModel} · {carTypeLabel(ride.carType)}</span>
+                      <Car size={13} />
+                      <span className={`car-type-badge ${carTypeClass(ride.carType)}`}>
+                        {ride.carType}
+                      </span>
                     </div>
                     {ride.driver && (
-                      <div className="ride-info-item" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                      <div className="ride-info-item" style={{ color: 'var(--text-muted)', fontSize: '0.83rem' }}>
                         by {ride.driver.name}
                       </div>
                     )}
                   </div>
+
                   <div className="ride-card-footer">
-                    <div style={{ display: 'flex', gap: 16, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                      <span>🕐 {formatTime(ride.time)}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <span style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                        🕐 {formatTime(ride.time)}
+                      </span>
                       {ride.pricePerSeat > 0 && (
-                        <span style={{ fontWeight: 700, color: 'var(--accent-secondary)' }}>₹{Math.round(ride.pricePerSeat)}/person</span>
+                        <span className="ride-price">
+                          ₹{Math.round(ride.pricePerSeat)}<small>/person</small>
+                        </span>
                       )}
                     </div>
                     <span className="btn btn-primary btn-sm">View Details</span>

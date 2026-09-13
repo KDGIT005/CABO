@@ -205,8 +205,8 @@ export default function RideDetail() {
               {/* Price Section */}
               {ride.totalPrice > 0 && (
                 <div style={{
-                  padding: '16px', background: 'linear-gradient(135deg, rgba(0,206,201,0.1), rgba(108,92,231,0.08))',
-                  borderRadius: 'var(--radius-md)', marginBottom: 16, border: '1px solid rgba(0,206,201,0.2)'
+                  padding: '16px', background: 'linear-gradient(135deg, rgba(4,150,140,0.08), rgba(91,75,214,0.06))',
+                  borderRadius: 'var(--radius-md)', marginBottom: 16, border: '1px solid rgba(4,150,140,0.18)'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>

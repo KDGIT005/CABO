@@ -5,7 +5,7 @@ import { useToast } from '../context/ToastContext';
 import { auth } from '../firebase';
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import api from '../api';
-import { LogIn, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { LogIn, Mail, Lock, Eye, EyeOff, Car, ArrowLeft } from 'lucide-react';
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -69,81 +69,108 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-page">
-      <div className="card auth-card">
-        <h1>Welcome Back</h1>
-        <p>Sign in to your Cabo account</p>
+    <div className="auth-page" style={{ animation: 'fadeIn 0.3s ease both' }}>
+      {/* Left branding panel */}
+      <div className="auth-left">
+        <Link to="/" className="auth-left-logo" style={{ textDecoration: 'none' }}>
+          <Car size={20} />
+          Cabo
+        </Link>
 
-        <form onSubmit={handleEmailLogin} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="login-email">Email</label>
-            <div className="input-icon-wrapper">
-              <Mail size={18} className="input-icon" />
-              <input
-                id="login-email"
-                type="email"
-                className="form-input input-with-icon"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={loading}
-              />
-            </div>
+        <div className="auth-left-content">
+          <div className="auth-left-tagline">
+            College<br />Rides,<br />Made Easy.
           </div>
-          <div className="form-group">
-            <label htmlFor="login-password">Password</label>
-            <div className="input-icon-wrapper">
-              <Lock size={18} className="input-icon" />
-              <input
-                id="login-password"
-                type={showPassword ? 'text' : 'password'}
-                className="form-input input-with-icon"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={loading}
-              />
-              <button
-                type="button"
-                className="input-icon-right"
-                onClick={() => setShowPassword(!showPassword)}
-                tabIndex={-1}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ width: '100%' }}
-            disabled={loading}
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-
-        <div className="auth-divider">
-          <span>or</span>
+          <p className="auth-left-sub">
+            Connect with students heading the same way. Safe, simple, and affordable shared rides.
+          </p>
         </div>
 
-        <button
-          type="button"
-          className="btn btn-google"
-          onClick={handleGoogleSignIn}
-          disabled={loading}
-        >
-          <svg width="18" height="18" viewBox="0 0 48 48">
-            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-          </svg>
-          Sign in with Google
-        </button>
+        <div className="auth-left-badges">
+          <span className="auth-badge">🚗 500+ Rides</span>
+          <span className="auth-badge">👥 1200+ Students</span>
+          <span className="auth-badge">📍 40+ Routes</span>
+        </div>
+      </div>
 
-        <div className="auth-footer">
-          Don't have an account? <Link to="/register">Sign Up</Link>
+      {/* Right form panel */}
+      <div className="auth-right">
+        <div className="auth-card">
+          <h1>Welcome Back</h1>
+          <p>Sign in to your Cabo account</p>
+
+          <form onSubmit={handleEmailLogin} className="auth-form">
+            <div className="form-group">
+              <label htmlFor="login-email"><Mail size={13} /> Email</label>
+              <div className="input-icon-wrapper">
+                <Mail size={17} className="input-icon" />
+                <input
+                  id="login-email"
+                  type="email"
+                  className="form-input input-with-icon"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="login-password"><Lock size={13} /> Password</label>
+              <div className="input-icon-wrapper">
+                <Lock size={17} className="input-icon" />
+                <input
+                  id="login-password"
+                  type={showPassword ? 'text' : 'password'}
+                  className="form-input input-with-icon"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  className="input-icon-right"
+                  onClick={() => setShowPassword(!showPassword)}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ width: '100%', marginTop: 4 }}
+              disabled={loading}
+            >
+              <LogIn size={16} />
+              {loading ? 'Signing in…' : 'Sign In'}
+            </button>
+          </form>
+
+          <div className="auth-divider"><span>or</span></div>
+
+          <button
+            type="button"
+            className="btn-google"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+          >
+            <svg width="17" height="17" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            Sign in with Google
+          </button>
+
+          <div className="auth-footer">
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </div>
         </div>
       </div>
     </div>
