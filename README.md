@@ -43,11 +43,6 @@ CABO is a **full-stack ride-sharing platform built for college students**, allow
 
 ---
 
-## 💬 Real-Time Chat
-<img width="1919" height="987" alt="Chat" src="https://github.com/user-attachments/assets/ec6259b7-2527-48b1-aec1-22721e8b2812" />
-
----
-
 # ✨ Features
 
 ## 🚀 Ride Management
